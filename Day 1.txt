@@ -1,0 +1,90 @@
+Triangle
+-------------------------------------
+
+package Scala_Assignment
+
+object Area_of_Triangle {
+  def main(args: Array[String]): Unit = {
+    println("Enter Base of Triangle")
+    val  base: Int = readInt
+    println("Enter height of Triangle")
+    val  hieght:Int = readInt
+
+    /*val area = (base * height)/2
+println("The Area is:" +area)
+*/
+    def areaFunction(b:Int, h:Int): Unit ={
+      var area1 = (b * h)/2
+      println("The Area Of Triangle:" +area1)
+    }
+
+   areaFunction(base,height)
+  }
+}
+
+
+Factorial
+--------------------------------
+package Scala_Assignment
+
+object Factorial {
+  def main(args: Array[String]): Unit = {
+    println("Enter the number for Factorial")
+    val num = readInt()
+
+    def factorial(f: Int): Int = {
+      if (f == 0)
+        return 1
+      else
+        return f * factorial(f - 1)
+    }
+println("Factorial of Number:"+factorial(num))
+
+  }
+}
+
+
+
+
+Pascal
+--------------------
+package Scala_Assignment
+
+object pascalTriangle {
+  def main(args: Array[String]): Unit = {
+
+    println("Pascal's Triangle: ")
+    println(makeTriangle(4))
+  }
+
+  def pascal(c: Long, r: Long): Long = {
+    if (c == 0 || c == r)
+      1
+    else
+      pascal(c - 1, r - 1) + pascal(c, r - 1)
+  }
+
+  def makeTriangle(rows: Int): String = {
+    (for {
+      row <- 0 to rows
+      col <- 0 to row
+    } yield (col, row)).foldLeft(("", -1)) {
+      case ((str, currentRow), (c, r)) =>
+        val p = pascal(c, r)
+        val v = if (r == currentRow) placeInRow(p, kern = 7) else createNewRow(rows, r, p)
+        (str + v, r)
+    }._1
+  }
+
+  def placeInRow(p: Long, kern: Int): String = {
+    val digitLength = p.toString.length
+    " " * Math.max(kern - digitLength, 1) + p
+  }
+
+  def createNewRow(totalRows: Int, currentRow: Int, p: Long): String = {
+    val offset = 4
+    "\n" + " " * (offset * totalRows - offset * currentRow) + p
+  }
+}
+
+
